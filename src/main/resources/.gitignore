@@ -1,0 +1,16 @@
+.classpath
+/target/
+target/*
+
+.settings/*
+.settings/**/*
+/bin/
+
+.idea
+.idea/*
+
+.project
+osm.iml
+
+src/main/resources/generatorConfig.xml
+src/main/resources/jdbc.properties

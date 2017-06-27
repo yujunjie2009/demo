@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"   
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
+    version="3.0">
+	
+	<display-name>newtiming_finance</display-name>
+
+	<!-- Spring ApplicationContext配置文件的路径,可使用通配符,多个路径用,号分隔 此参数用于后面的Spring Context Loader -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/spring/spring-application.xml
+		</param-value>
+	</context-param>
+  	<context-param>
+	    <param-name>spring.profiles.default</param-name>
+	    <!-- <param-value>${project.env}</param-value> -->
+	    <param-value>dev</param-value>
+	</context-param>
+	
+	<context-param>
+        <param-name>isLog4jAutoInitializationDisabled</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <!-- 默认就会找这个文件，不需要额外配置引用 -->
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>log4j2.xml</param-value>
+        <!-- <param-value>conf/dev/log4j2.xml</param-value> -->
+        <!-- <param-value>classpath*:conf/${project.env}/log4j2.xml</param-value> -->
+    </context-param>
+	
+	<!-- <listener>
+		<listener-class>com.newtiming.finance.listener.InitListener</listener-class>
+	</listener> -->
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!-- <listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener> -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+<!-- ***************************** log4j2配置  begin ***********************************************-->
+
+    
+    <listener>
+        <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+    </listener>
+   
+    <filter>
+        <filter-name>log4jServletFilter</filter-name>
+        <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>log4jServletFilter</filter-name>
+        <url-pattern>*.htm</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+<!-- ***************************** log4j2配置  end ***********************************************-->
+
+
+<!-- ***************************** session过滤器  begin ******************************************-->
+	<!-- <filter>
+        <filter-name>AdminSessionFilter</filter-name>
+        <filter-class>com.newtiming.finance.filter.AdminSessionFilter</filter-class>
+        <init-param>
+	      <param-name>whiteUrls</param-name>
+	      <param-value>/admin/reqlogin.htm,/admin/login.htm</param-value>
+	    </init-param>
+        <init-param>
+	      <param-name>staticUrls</param-name>
+	      <param-value>.js,.css,.jpg,.png,.gif,.ico,.json,.jsp,.swf</param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>
+        <filter-name>AdminSessionFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+	</filter-mapping> -->
+<!-- ***************************** session过滤器  end ***************************************-->
+
+
+
+<!-- ***************************** 静态资源 begin *******************************************-->
+	<!-- 引入静态文件 -->
+	<!-- <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping> -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpeg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+       <servlet-name>default</servlet-name>
+       <url-pattern>*.ico</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+       <servlet-name>default</servlet-name>
+       <url-pattern>*.swf</url-pattern>
+    </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ttf</url-pattern>
+	</servlet-mapping>
+<!-- ***************************** 静态资源 begin *******************************************-->
+
+
+
+<!-- ***************************** SpringMVC配置  begin *************************************-->
+	<!-- SpringMVC servlet -->
+	<servlet>
+	    <servlet-name>newtiming-finance</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>classpath*:/spring/spring-mvc.xml</param-value>
+	    </init-param>
+	    <!-- <init-param>
+	    	<param-name>detectAllHandlerExceptionResolvers</param-name>
+	    	<param-value>false</param-value>
+	    </init-param> -->
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>newtiming-finance</servlet-name>
+	    <url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+
+
+	<filter> 
+		<filter-name>CharacterEncoding</filter-name> 
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+		<init-param> 
+			<param-name>encoding</param-name> 
+			<param-value>UTF-8</param-value> 
+		</init-param> 
+		<init-param> 
+			<param-name>forceEncoding</param-name> 
+			<param-value>true</param-value>
+		</init-param> 
+	</filter>
+	<filter-mapping> 
+		<filter-name>CharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+<!-- ***************************** SpringMVC配置  end ******************************************-->
+    
+    
+<!-- ***************************** druid 配置begin ******************************************* -->
+	<servlet>
+	    <servlet-name>DruidStatView</servlet-name>
+	    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>DruidStatView</servlet-name>
+	    <url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+<!-- ***************************** druid 配置 end **********************************************-->
+
+
+<!-- *****************************   begin *****************************************-->
+
+	
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+
+
+<!-- ***************************** 自定义出错页面  begin *****************************************-->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error/50X.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/50X.html</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error/403.html</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error/403.html</location>
+	</error-page>
+<!-- ***************************** 自定义出错页面  end *****************************************-->
+
+
+    <!-- 设置session 超时时间,单位:分钟  -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

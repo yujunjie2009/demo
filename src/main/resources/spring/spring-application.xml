@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<description>Spring公共配置 </description>
+	
+	<!-- 注解扫描根目录 -->
+    <context:component-scan base-package="com.newtiming"/>
+	
+	<import resource="classpath*:spring/spring-mvc.xml"/>
+	<import resource="classpath*:spring/spring-db.xml" />
+	<import resource="classpath*:spring/spring-mybatis.xml"/>
+    
+    
+    <!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location" value="classpath:profile.properties" />
+    </bean> -->
+    
+    <!-- <context:property-placeholder location="classpath*:conf/${profile.env}/jdbc.properties"/> -->
+    
+	<!-- 开发环境  -->
+	<beans profile="dev">
+		<context:property-placeholder location="classpath*:conf/dev/jdbc.properties"/>
+	</beans>
+	<!-- 测试环境 -->
+	<beans profile="test">
+		<context:property-placeholder location="classpath*:conf/test/jdbc.properties"/>
+	</beans>
+	<!-- 生产环境  -->
+	<beans profile="prod">
+		<context:property-placeholder location="classpath*:conf/prod/jdbc.properties"/>
+	</beans>
+	
+</beans>

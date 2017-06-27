@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:\repos\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<!-- <plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
+			<property name="fileName" value="GeneratedMapperConfig.xml" />
+			<property name="targetPackage" value="com.easyway.app.core.mgr" />
+			<property name="targetProject" value="../java" />
+		</plugin> -->
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+		
+		<!-- 这里的type里写的是你的实现类的类全路径 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- <commentGenerator type="common.generator.MyCommentGenerator">
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator> -->
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://218.75.39.82:7824/newtiming_finance" userId="root" password="5Q8R9Fqu">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		
+		<javaModelGenerator targetPackage="com.newtiming.finance.model.temp" targetProject="newtiming-finance">
+			<property name="enableSubPackages" value="true"/>
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.newtiming.finance.map.temp" targetProject="newtiming-finance">
+			<property name="enableSubPackages" value="true"/>
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.newtiming.finance.dao.temp" targetProject="newtiming-finance">
+			<property name="enableSubPackages" value="false"/>
+		</javaClientGenerator>
+		
+<!-- ========================= 需要生成的表 begin ============================== -->
+        <!-- <table schema="hfxdm" tableName="t_news" domainObjectName="News"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />不用驼峰命名 
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>自增主键 
+            <columnOverride column="content" jdbcType="VARCHAR" />自定义数据类型 
+        </table> -->
+        
+        <!-- <table schema="newtiming_finance" tableName="sys_permission" domainObjectName="Permission"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="sys_role" domainObjectName="Role"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="sys_department" domainObjectName="Department"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="sys_user" domainObjectName="User"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="sys_permission_group" domainObjectName="PermissionGroup"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        
+        <!-- <table schema="newtiming_finance" tableName="t_account" domainObjectName="Account"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="t_account_detail" domainObjectName="AccountDetail"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table> -->
+        <!-- <table schema="newtiming_finance" tableName="t_remind" domainObjectName="Remind"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table> -->
+        <table schema="newtiming_finance" tableName="t_remind_detail" domainObjectName="RemindDetail"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        
+        <!-- <table schema="newtiming_finance" tableName="t_balance" domainObjectName="Balance"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table> -->
+<!-- ========================= 需要生成的表 end ============================== -->
+	</context>
+</generatorConfiguration>
